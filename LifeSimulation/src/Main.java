@@ -2,8 +2,12 @@
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Hello world!");
-
+		Player plr = new Player();
+		Game game = new Game();
+		
+		while (plr.isAlive()) {
+			game.showMenu();
+		}
 	}
 
 }
