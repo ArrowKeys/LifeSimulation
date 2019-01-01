@@ -12,8 +12,8 @@ public class Player {
 	private int age;
 	private boolean alive;
 
-	private String[] firstNames = { "John", "Joe", "Jimmy" };
-	private String[] lastNames = { "Smith", "Doe", "Johnson" };
+	private String[] firstNames = { };
+	private String[] lastNames = { };
 
 	public Player() {
 		this.r = new Random();

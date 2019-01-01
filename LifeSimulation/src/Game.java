@@ -24,7 +24,8 @@ public class Game {
 				"[1] Age 1 year\n" + 
 				"[2] Show character statistics\n" + 
 				"[3] Show relationships\n" +
-				"[4] Commit suicide (quit)\nChoose an action: ");
+				"[4] Commit suicide (quit)\n" + 
+				"Choose an action: ");
 
 		if (sc.hasNextInt()) {
 			option = sc.nextInt();
@@ -38,6 +39,7 @@ public class Game {
 				break;
 			case 3:
 				System.out.println("Feature has not yet been implemented.");
+				//TODO: implement relationships
 				showMenu();
 				break;
 			case 4:
