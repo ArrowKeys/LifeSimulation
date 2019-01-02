@@ -15,6 +15,9 @@ public class Player {
 	private String lastName;
 	private int age;
 	private boolean alive;
+	private boolean isInSchool;
+	double educationLevel;
+	double educationIncrement;
 
 	private ArrayList<String> firstNames = new ArrayList<String>();
 	private ArrayList<String> lastNames = new ArrayList<String>();
@@ -35,6 +38,10 @@ public class Player {
 		this.alive = true;
 		this.firstName = firstNames.get(r.nextInt(firstNames.size()));
 		this.lastName = lastNames.get(r.nextInt(lastNames.size()));
+		this.isInSchool = false;
+		this.educationLevel = 0.0;
+		this.educationIncrement = 0.0;
+		
 
 	}
 
@@ -63,11 +70,6 @@ public class Player {
 		return alive;
 	}
 
-	public String statistics() {
-
-		return new String(this.getFirstName() + " " + this.getLastName() + "\nAge: " + this.getAge());
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
@@ -90,6 +92,70 @@ public class Player {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public boolean isInSchool() {
+		return isInSchool;
+	}
+
+	public void setInSchool(boolean isInSchool) {
+		this.isInSchool = isInSchool;
+	}
+
+	public double getEducationLevel() {
+		return Double.parseDouble(String.format("%.2f", this.educationLevel));
+	}
+
+	public void setEducationLevel(double educationLevel) {
+		this.educationLevel = educationLevel;
+	}
+
+	public void age() {
+		this.setAge(this.getAge() + 1);
+		System.out.println("\nYou are now " + this.getAge() + " year" + (this.getAge() == 1 ? " " : "s ") + "old.");
+		
+		if (this.isInSchool()) {
+			this.setEducationLevel(this.getEducationLevel() + this.getEducationIncrement());
+		}
+		
+		switch(this.getAge()) {
+		case 6:
+			this.startSchool();
+			break;
+		default:
+			break;
+		}
+	}
+
+	private double getEducationIncrement() {		
+		return educationIncrement;
+	}
+
+	public void setEducationIncrement(double educationIncrement) {
+		this.educationIncrement = educationIncrement;
+	}
+
+	private void startSchool() {
+		this.setInSchool(true);
+		System.out.println("You have started going to school.");
+		this.setEducationIncrement(0.3);
+	}
+
+	
+	public void statistics() {
+		System.out.println("\n" +(this.getFirstName() + " " + this.getLastName() 
+				+ "\nAge: " + this.getAge()
+				+ "\nEducation: " + this.getEducationLevel()
+				+ "\n"));
+	}
+
+	public void showRelationships() {
+		System.out.println("\nThis feature has not yet been implemented.");
+		
+	}
+
+	public void die() {
+		this.setAlive(false);		
 	}
 
 }
