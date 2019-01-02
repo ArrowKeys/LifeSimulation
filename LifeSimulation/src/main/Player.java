@@ -1,3 +1,4 @@
+package main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class Player {
 	public Player() {
 
 		try {
-			String firstNamesFile = "/names/FirstNames.txt";
-			String lastNamesFile = "/names/LastNames.txt";
+			String firstNamesFile = "names/FirstNames.txt";
+			String lastNamesFile = "names/LastNames.txt";
 			firstNames = populateNames(firstNamesFile);
 			lastNames = populateNames(lastNamesFile);
 		} catch (FileNotFoundException e) {
