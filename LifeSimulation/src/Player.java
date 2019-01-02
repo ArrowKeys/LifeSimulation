@@ -25,8 +25,8 @@ public class Player {
 	public Player() {
 
 		try {
-			String firstNamesFile = "Names/FirstNames.txt";
-			String lastNamesFile = "Names/LastNames.txt";
+			String firstNamesFile = "/names/FirstNames.txt";
+			String lastNamesFile = "/names/LastNames.txt";
 			firstNames = populateNames(firstNamesFile);
 			lastNames = populateNames(lastNamesFile);
 		} catch (FileNotFoundException e) {
@@ -41,7 +41,6 @@ public class Player {
 		this.isInSchool = false;
 		this.educationLevel = 0.0;
 		this.educationIncrement = 0.0;
-		
 
 	}
 
@@ -105,12 +104,12 @@ public class Player {
 	public void age() {
 		this.setAge(this.getAge() + 1);
 		System.out.println("\nYou are now " + this.getAge() + " year" + (this.getAge() == 1 ? " " : "s ") + "old.");
-		
+
 		if (this.isInSchool()) {
 			this.setEducationLevel(this.getEducationLevel() + this.getEducationIncrement());
 		}
-		
-		switch(this.getAge()) {
+
+		switch (this.getAge()) {
 		case 6:
 			this.startSchool();
 			break;
@@ -118,7 +117,7 @@ public class Player {
 			break;
 		}
 	}
-	
+
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
@@ -126,9 +125,8 @@ public class Player {
 	public boolean getAlive() {
 		return alive;
 	}
-	
 
-	private double getEducationIncrement() {		
+	private double getEducationIncrement() {
 		return educationIncrement;
 	}
 
@@ -142,21 +140,18 @@ public class Player {
 		this.setEducationIncrement(0.3);
 	}
 
-	
 	public void statistics() {
-		System.out.println("\n" +(this.getFirstName() + " " + this.getLastName() 
-				+ "\nAge: " + this.getAge()
-				+ "\nEducation: " + this.getEducationLevel()
-				+ "\n"));
+		System.out.println("\n" + (this.getFirstName() + " " + this.getLastName() + "\nAge: " + this.getAge()
+				+ "\nEducation: " + this.getEducationLevel() + "\n"));
 	}
 
 	public void showRelationships() {
 		System.out.println("\nThis feature has not yet been implemented.");
-		
+
 	}
 
 	public void die() {
-		this.setAlive(false);		
+		this.setAlive(false);
 	}
 
 	public boolean canGetJob() {

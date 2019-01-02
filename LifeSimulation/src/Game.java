@@ -47,7 +47,7 @@ public class Game {
 		} else {
 			sc.next();
 			System.out.println("Invalid option, please enter a valid integer!");
-			
+
 		}
 		this.displayMenu();
 	}
@@ -89,7 +89,7 @@ public class Game {
 		} else {
 			sc.next();
 			System.out.println("Invalid option, please enter a valid integer!");
-			
+
 		}
 		displayActions();
 	}
@@ -111,7 +111,7 @@ public class Game {
 					plr.setInSchool(false);
 				else
 					System.out.println("You are not in school!");
-					this.displayEducation();
+				this.displayEducation();
 				break;
 			case 0:
 				this.displayActions();

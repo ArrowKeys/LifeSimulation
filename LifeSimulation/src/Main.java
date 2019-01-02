@@ -8,7 +8,7 @@ public class Main {
 		while (plr.isAlive()) {
 			game.displayMenu();
 		}
-		
+
 		game.gameOver();
 	}
 
