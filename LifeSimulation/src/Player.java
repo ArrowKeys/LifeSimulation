@@ -16,8 +16,8 @@ public class Player {
 	private int age;
 	private boolean alive;
 	private boolean isInSchool;
-	double educationLevel;
-	double educationIncrement;
+	private double educationLevel;
+	private double educationIncrement;
 
 	private ArrayList<String> firstNames = new ArrayList<String>();
 	private ArrayList<String> lastNames = new ArrayList<String>();
@@ -60,14 +60,6 @@ public class Player {
 
 	public boolean isAlive() {
 		return ((this.getAge() >= this.MIN_AGE && this.getAge() < this.MAX_AGE) && this.getAlive());
-	}
-
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
-
-	public boolean getAlive() {
-		return alive;
 	}
 
 	public String getFirstName() {
@@ -126,6 +118,15 @@ public class Player {
 			break;
 		}
 	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+
+	public boolean getAlive() {
+		return alive;
+	}
+	
 
 	private double getEducationIncrement() {		
 		return educationIncrement;
@@ -156,6 +157,10 @@ public class Player {
 
 	public void die() {
 		this.setAlive(false);		
+	}
+
+	public boolean canGetJob() {
+		return this.getAge() > 16 && this.getAge() < 75;
 	}
 
 }

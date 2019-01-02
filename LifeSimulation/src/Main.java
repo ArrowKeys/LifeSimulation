@@ -6,7 +6,7 @@ public class Main {
 		Game game = new Game(plr);
 
 		while (plr.isAlive()) {
-			game.showMenu();
+			game.displayMenu();
 		}
 		
 		game.gameOver();
