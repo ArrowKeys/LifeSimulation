@@ -18,7 +18,7 @@ public class Game {
 
 	public void showMenu() {
 
-		int option = 0;
+		int option;
 
 		System.out.print("\n" + 
 				"[1] Age 1 year\n" + 
@@ -32,21 +32,19 @@ public class Game {
 
 			switch (option) {
 			case 1:
-				plr.setAge(plr.getAge() + 1);
+				plr.age();
 				break;
 			case 2:
-				System.out.println(plr.statistics());
+				plr.statistics();
 				break;
 			case 3:
-				System.out.println("Feature has not yet been implemented.");
-				//TODO: implement relationships
-				showMenu();
+				plr.showRelationships();
 				break;
 			case 4:
-				plr.setAlive(false);
+				plr.die();
 				break;
 			default:
-				showMenu();
+				System.out.println("Invalid option, please enter a valid integer!");
 				break;
 			}
 		} else {
@@ -57,7 +55,8 @@ public class Game {
 	}
 
 	public void gameOver() {
-		System.out.println("You died!\n" + plr.statistics());
+		System.out.println("\nYou died!\nPLAYER STATISTICS");
+		plr.statistics();
 
 	}
 }
