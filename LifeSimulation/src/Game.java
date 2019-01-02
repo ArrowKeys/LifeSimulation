@@ -43,12 +43,13 @@ public class Game {
 				System.out.println("Invalid option, please enter a valid integer!");
 				break;
 			}
-			
+
 		} else {
 			sc.next();
 			System.out.println("Invalid option, please enter a valid integer!");
-			displayMenu();
+			
 		}
+		this.displayMenu();
 	}
 
 	private void displayActions() {
@@ -56,8 +57,8 @@ public class Game {
 		int option;
 
 		System.out.print("\nACTIONS\n" + "[1] Open Belongings Menu\n" + "[2] Open Employment Menu\n"
-				+ "[3] Open Education Menu\n" + "[4] Open Activities Menu\n" + "[5] Back\n" + "Choose an option: ");
-		
+				+ "[3] Open Education Menu\n" + "[4] Open Activities Menu\n" + "[0] Back\n" + "Choose an option: ");
+
 		if (sc.hasNextInt()) {
 			option = sc.nextInt();
 
@@ -77,19 +78,20 @@ public class Game {
 			case 4:
 				this.displayActivities();
 				break;
-			case 5:
+			case 0:
 				this.displayMenu();
 				break;
 			default:
 				System.out.println("Invalid option, please enter a valid integer!");
 				break;
 			}
-			
+
 		} else {
 			sc.next();
 			System.out.println("Invalid option, please enter a valid integer!");
-			displayActions();
+			
 		}
+		displayActions();
 	}
 
 	private void displayActivities() {
@@ -97,10 +99,26 @@ public class Game {
 	}
 
 	private void displayEducation() {
-		System.out.println("EDUCATION\n"
-				+ "Current education: " + plr.getEducationLevel() + "\n"
-				+ "[1] Drop out of school\n"
-				+ "[2] Back");
+		int option;
+		System.out.println("EDUCATION\n" + "Current education: " + plr.getEducationLevel() + "\n"
+				+ "[1] Drop out of school\n" + "[0] Back");
+		if (sc.hasNextInt()) {
+			option = sc.nextInt();
+
+			switch (option) {
+			case 1:
+				if (plr.isInSchool())
+					plr.setInSchool(false);
+				else
+					System.out.println("You are not in school!");
+					this.displayEducation();
+				break;
+			case 0:
+				this.displayActions();
+				break;
+			}
+			this.displayEducation();
+		}
 	}
 
 	private void displayEmployment() {
