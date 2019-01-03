@@ -17,6 +17,8 @@ public class Player {
 	private int age;
 	private boolean alive;
 	private boolean isInSchool;
+	private boolean hasStudiedThisYear;
+	private boolean hasPlayedLotteryThisYear;
 	private double educationLevel;
 	private double educationIncrement;
 
@@ -94,6 +96,22 @@ public class Player {
 		this.isInSchool = isInSchool;
 	}
 
+	public boolean hasStudiedThisYear() {
+		return hasStudiedThisYear;
+	}
+
+	public void setHasStudiedThisYear(boolean hasStudiedThisYear) {
+		this.hasStudiedThisYear = hasStudiedThisYear;
+	}
+
+	public boolean hasPlayedLotteryThisYear() {
+		return hasPlayedLotteryThisYear;
+	}
+
+	public void setHasPlayedLotteryThisYear(boolean hasPlayedLotteryThisYear) {
+		this.hasPlayedLotteryThisYear = hasPlayedLotteryThisYear;
+	}
+
 	public double getEducationLevel() {
 		return Double.parseDouble(String.format("%.2f", this.educationLevel));
 	}
@@ -108,6 +126,9 @@ public class Player {
 
 		if (this.isInSchool()) {
 			this.setEducationLevel(this.getEducationLevel() + this.getEducationIncrement());
+			if (this.hasStudiedThisYear()) {
+				this.setHasStudiedThisYear(false);
+			}
 		}
 
 		switch (this.getAge()) {
@@ -127,7 +148,7 @@ public class Player {
 		return alive;
 	}
 
-	private double getEducationIncrement() {
+	public double getEducationIncrement() {
 		return educationIncrement;
 	}
 
@@ -135,7 +156,11 @@ public class Player {
 		this.educationIncrement = educationIncrement;
 	}
 
-	private void startSchool() {
+	public Random getR() {
+		return r;
+	}
+
+	public void startSchool() {
 		this.setInSchool(true);
 		System.out.println("You have started going to school.");
 		this.setEducationIncrement(0.3);
@@ -157,6 +182,11 @@ public class Player {
 
 	public boolean canGetJob() {
 		return this.getAge() > 16 && this.getAge() < 75;
+	}
+
+	public void goForAWalk() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

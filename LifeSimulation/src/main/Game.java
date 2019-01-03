@@ -1,8 +1,10 @@
 package main;
+
 import java.util.Scanner;
 
 public class Game {
 
+	private final int LOTTERY_PRICE = 2;
 	private Scanner sc;
 	private Player plr;
 
@@ -96,7 +98,59 @@ public class Game {
 	}
 
 	private void displayActivities() {
+		int option;
 
+		System.out.print("\nACTIVITIES\n" + "[1] Go for a walk\n" + "[2] Study\n" + "[3] Play the lottery ($"
+				+ LOTTERY_PRICE + ")\n" + "[4] Browse the Internet\n" + "[0] Back\n" + "Choose an option: ");
+
+		if (sc.hasNextInt()) {
+			option = sc.nextInt();
+
+			switch (option) {
+			case 1:
+				if (plr.getAge() >= 2)
+					plr.goForAWalk();
+				else
+					System.out.println("You can't walk yet.");
+				break;
+			case 2:
+				if (plr.isInSchool()) {
+					if (!plr.hasStudiedThisYear()) {
+						if (plr.getR().nextFloat() >= 0.7) {
+							System.out.println("You stay focused for a few hours and learn a lot.\nYou feel smarter.");
+							plr.setEducationIncrement(plr.getEducationIncrement() + 0.5);
+						} else {
+							System.out.println(
+									"No matter how hard you try to focus, you can't grasp the subject. Nothing happens.");
+						}
+						plr.setHasStudiedThisYear(true);
+					} else {
+						System.out.println("You've already studied this year.");
+					}
+				} else {
+					System.out.println("You aren't in school; you can't study!");
+				}
+				break;
+			case 3:
+				this.displayEducation();
+				break;
+			case 4:
+				this.displayActivities();
+				break;
+			case 0:
+				this.displayMenu();
+				break;
+			default:
+				System.out.println("Invalid option, please enter a valid integer!");
+				break;
+			}
+
+		} else {
+			sc.next();
+			System.out.println("Invalid option, please enter a valid integer!");
+
+		}
+		displayActivities();
 	}
 
 	private void displayEducation() {
