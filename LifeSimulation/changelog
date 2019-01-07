@@ -1,18 +1,24 @@
 [1/7/19] 18:00
-- Added changelog
 
-Player.java
-- Removed the `isAlive()` function and just re-did the way the menu was being displayed
-- Any instance of `get...()` and `set...()` in the Player class was removed and replaced with the names of the variables that were being get and set.
-- Fixed the bug with aging past the constant age limit, the program now exits too. (exit code 0)
-- Put the things that were important to the game in the Game class, so there's minimal mixup between what's in Player.java and what's in Game.java. 
-  Everything to do with the Player is now in Player and everything to do with the Game is now in Game.
-  This also helped in removing things like `GetR()` and other things that were in the wrong class.
- 
- Game.java
-- LOTTERY_PRICE is now in Game.java and static, not sure how I looked past that.
-- Switch statements were organized into function calls with the logic in those functions.
-- Renamed `plr` to `player`
+0.2
+	- renamed menu functions
+	- Game.player and Game.sc are now final
 
-Insight
-There might be a bug with displaying the menu, I'm still trying to figure out how to replicate it. 
+0.1
+	- Added changelog
+	
+	Player.java
+	- Removed the `isAlive()` function and just re-did the way the menu was being displayed
+	- Any instance of `get...()` and `set...()` in the Player class was removed and replaced with the names of the variables that were being get and set.
+	- Fixed the bug with aging past the constant age limit, the program now exits too. (exit code 0)
+	- Put the things that were important to the game in the Game class, so there's minimal mixup between what's in Player.java and what's in Game.java. 
+	  Everything to do with the Player is now in Player and everything to do with the Game is now in Game.
+	  This also helped in removing things like `GetR()` and other things that were in the wrong class.
+	 
+	 Game.java
+	- LOTTERY_PRICE is now in Game.java and static, not sure how I looked past that.
+	- Switch statements were organized into function calls with the logic in those functions.
+	- Renamed `plr` to `player`
+	
+	Insight
+	There might be a bug with displaying the menu, I'm still trying to figure out how to replicate it. 

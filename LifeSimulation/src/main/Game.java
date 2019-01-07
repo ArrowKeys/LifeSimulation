@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Game {
 
-	private Scanner sc;
-	private Player player;
+	private final Scanner sc;
+	private final Player player;
 
 	private static final int LOTTERY_PRICE = 2;
 
