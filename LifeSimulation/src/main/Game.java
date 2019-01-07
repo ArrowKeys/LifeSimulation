@@ -20,7 +20,7 @@ public class Game {
 				+ player.getAge() + " years old.\nGood luck.\n");
 	}
 
-	public void displayMenu() {
+	public void mainMenu() {
 
 		int option;
 
@@ -56,7 +56,7 @@ public class Game {
 		
 		//Checks if the player is alive after the switch statement is broken out of
 		if (player.isAlive())
-			displayMenu();
+			mainMenu();
 		else
 			gameOver();
 
@@ -74,19 +74,19 @@ public class Game {
 
 			switch (option) {
 			case 1:
-				this.displayBelongings();
+				this.belongingsMenu();
 				break;
 			case 2:
-				this.displayEmployment();
+				this.employmentMenu();
 				break;
 			case 3:
-				this.displayEducation();
+				this.educationMenu();
 				break;
 			case 4:
-				this.displayActivities();
+				this.activitiesMenu();
 				break;
 			case 0:
-				this.displayMenu();
+				this.mainMenu();
 				break;
 			default:
 				System.out.println("Invalid option, please enter a valid integer!");
@@ -100,7 +100,7 @@ public class Game {
 		displayActions();
 	}
 
-	private void displayActivities() {
+	private void activitiesMenu() {
 		int option;
 
 		System.out.print("\nACTIVITIES\n" + "[1] Go for a walk\n" + "[2] Study\n" + "[3] Play the lottery ($"
@@ -138,10 +138,10 @@ public class Game {
 			System.out.println("Invalid option, please enter a valid integer!");
 
 		}
-		displayActivities();
+		activitiesMenu();
 	}
 
-	private void displayEducation() {
+	private void educationMenu() {
 		int option;
 		System.out.println("EDUCATION\n" + "Current education: " + player.getEducationLevel() + "\n"
 				+ "[1] Drop out of school\n" + "[0] Back");
@@ -151,7 +151,7 @@ public class Game {
 			switch (option) {
 			case 1:
 				player.dropOutOfSchool();
-				this.displayEducation();
+				educationMenu();
 				break;
 			case 0:
 				this.displayActions();
@@ -160,11 +160,11 @@ public class Game {
 				System.out.println("Invalid option, please enter a valid integer!");
 				break;
 			}
-			displayEducation();
+			educationMenu();
 		}
 	}
 
-	private void displayEmployment() {
+	private void employmentMenu() {
 		if (player.canGetJob())
 			System.out.println("Jobs will be added Soon™");
 		// TODO add jobs etc
@@ -173,7 +173,7 @@ public class Game {
 		displayActions();
 	}
 
-	private void displayBelongings() {
+	private void belongingsMenu() {
 		// TODO add inventory? properties like houses, cars, etc?
 		displayActions();
 	}

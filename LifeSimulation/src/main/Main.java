@@ -6,7 +6,7 @@ public class Main {
 		Player player = new Player();
 		Game game = new Game(player);
 		
-		game.displayMenu();
+		game.mainMenu();
 		//Just in case something fucks up
 		game.gameOver();
 
