@@ -1,4 +1,5 @@
 package main;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ public class Player {
 
 	private final int MAX_AGE = 100;
 	private final int MIN_AGE = 0;
+	private final int LOTTERY_PRICE = 2;
+	private final int ALLOWANCE = 5;
 
 	private Random r;
 
@@ -24,6 +27,8 @@ public class Player {
 
 	private ArrayList<String> firstNames = new ArrayList<String>();
 	private ArrayList<String> lastNames = new ArrayList<String>();
+	private int money;
+	private boolean isReceivingAllowance;
 
 	public Player() {
 
@@ -44,6 +49,8 @@ public class Player {
 		this.isInSchool = false;
 		this.educationLevel = 0.0;
 		this.educationIncrement = 0.0;
+		this.money = 0;
+		this.isReceivingAllowance = false;
 
 	}
 
@@ -58,6 +65,31 @@ public class Player {
 		sc.close();
 		return names;
 
+	}
+
+	public void age() {
+		this.setAge(this.getAge() + 1);
+		System.out.println("\nYou are now " + this.getAge() + " year" + (this.getAge() == 1 ? " " : "s ") + "old.");
+
+		if (this.isInSchool()) {
+			this.setEducationLevel(this.getEducationLevel() + this.getEducationIncrement());
+			if (this.hasStudiedThisYear()) {
+				this.setHasStudiedThisYear(false);
+			}
+		}
+		if (this.isReceivingAllowance()) {
+			this.setMoney(this.getMoney() + this.ALLOWANCE);
+		}
+
+		switch (this.getAge()) {
+		case 6:
+			this.startSchool();
+			break;
+		case 10:
+			this.startAllowance();
+		default:
+			break;
+		}
 	}
 
 	public boolean isAlive() {
@@ -86,6 +118,10 @@ public class Player {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public int getLOTTERY_PRICE() {
+		return LOTTERY_PRICE;
 	}
 
 	public boolean isInSchool() {
@@ -120,26 +156,6 @@ public class Player {
 		this.educationLevel = educationLevel;
 	}
 
-	public void age() {
-		this.setAge(this.getAge() + 1);
-		System.out.println("\nYou are now " + this.getAge() + " year" + (this.getAge() == 1 ? " " : "s ") + "old.");
-
-		if (this.isInSchool()) {
-			this.setEducationLevel(this.getEducationLevel() + this.getEducationIncrement());
-			if (this.hasStudiedThisYear()) {
-				this.setHasStudiedThisYear(false);
-			}
-		}
-
-		switch (this.getAge()) {
-		case 6:
-			this.startSchool();
-			break;
-		default:
-			break;
-		}
-	}
-
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
@@ -156,6 +172,15 @@ public class Player {
 		this.educationIncrement = educationIncrement;
 	}
 
+	private void setMoney(int m) {
+		this.money = m;
+
+	}
+
+	private int getMoney() {
+		return this.money;
+	}
+
 	public Random getR() {
 		return r;
 	}
@@ -166,13 +191,29 @@ public class Player {
 		this.setEducationIncrement(0.3);
 	}
 
+	private void startAllowance() {
+		System.out.println("You have started receiving a yearly allowance of $" + this.ALLOWANCE);
+		this.setIsReceivingAllowance(true);
+
+	}
+
+	private boolean isReceivingAllowance() {
+		return this.isReceivingAllowance;
+	}
+
+	private void setIsReceivingAllowance(boolean b) {
+		this.isReceivingAllowance = b;
+
+	}
+
 	public void statistics() {
 		System.out.println("\n" + (this.getFirstName() + " " + this.getLastName() + "\nAge: " + this.getAge()
-				+ "\nEducation: " + this.getEducationLevel() + "\n"));
+				+ "\nEducation: " + this.getEducationLevel() + "\nMoney: " + this.getMoney() + "\n"));
 	}
 
 	public void showRelationships() {
 		System.out.println("\nThis feature has not yet been implemented.");
+		// TODO write this
 
 	}
 
@@ -185,7 +226,24 @@ public class Player {
 	}
 
 	public void goForAWalk() {
-		// TODO Auto-generated method stub
+		// TODO write this
+
+	}
+
+	public void playLottery() {
+		this.setHasPlayedLotteryThisYear(true);
+		this.setMoney(this.getMoney() - this.getLOTTERY_PRICE());
+		if (this.getR().nextFloat() <= 0.01) {
+			// Win the lottery
+		} else {
+			System.out.println("You did not win the lottery. You now have $" + this.getMoney());
+		}
+
+	}
+
+	public void browseInternet() {
+		System.out.println("You scroll through social media for a bit. You feel like you're wasting your time.");
+		//TODO add more Internet things
 		
 	}
 

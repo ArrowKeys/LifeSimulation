@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Game {
 
-	private final int LOTTERY_PRICE = 2;
 	private Scanner sc;
 	private Player plr;
 
@@ -101,7 +100,7 @@ public class Game {
 		int option;
 
 		System.out.print("\nACTIVITIES\n" + "[1] Go for a walk\n" + "[2] Study\n" + "[3] Play the lottery ($"
-				+ LOTTERY_PRICE + ")\n" + "[4] Browse the Internet\n" + "[0] Back\n" + "Choose an option: ");
+				+ plr.getLOTTERY_PRICE() + ")\n" + "[4] Browse the Internet\n" + "[0] Back\n" + "Choose an option: ");
 
 		if (sc.hasNextInt()) {
 			option = sc.nextInt();
@@ -120,8 +119,7 @@ public class Game {
 							System.out.println("You stay focused for a few hours and learn a lot.\nYou feel smarter.");
 							plr.setEducationIncrement(plr.getEducationIncrement() + 0.5);
 						} else {
-							System.out.println(
-									"No matter how hard you try to focus, you can't grasp the subject. Nothing happens.");
+							System.out.println("No matter how hard you try to focus, you can't grasp the subject. Nothing happens.");
 						}
 						plr.setHasStudiedThisYear(true);
 					} else {
@@ -132,10 +130,19 @@ public class Game {
 				}
 				break;
 			case 3:
-				this.displayEducation();
+				if (plr.getAge() >= 18)
+					if (!plr.hasPlayedLotteryThisYear())
+						plr.playLottery();
+					else
+						System.out.println("You have already played the lottery this year");
+				else
+					System.out.println("You are too young to gamble. You need to be at least 18 years old.");
 				break;
 			case 4:
-				this.displayActivities();
+				if (plr.getAge() >= 8)
+					plr.browseInternet();
+				else
+					System.out.println("You are too young to use the Internet.");
 				break;
 			case 0:
 				this.displayMenu();
