@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Player {
 
-	private static final int MAX_AGE = 12;
+	private static final int MAX_AGE = 100;
 	private static final int YEARLY_ALLOWANCE = 5;
 
 	private static final Random r = new Random();
