@@ -1,4 +1,4 @@
-[1/7/19]
+[1/7/19] 18:00
 - Added changelog
 
 Player.java
@@ -15,4 +15,4 @@ Player.java
 - Renamed `plr` to `player`
 
 Insight
-There might be a bug with displaying the menu, I'm still trying to figure out how to replicate it, but that's all the changes I made in the past hour. 
+There might be a bug with displaying the menu, I'm still trying to figure out how to replicate it. 
