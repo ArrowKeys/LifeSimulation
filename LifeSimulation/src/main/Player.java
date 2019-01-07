@@ -189,10 +189,6 @@ public class Player {
 
 	}
 
-	// Currently unused
-	// TODO add a 'commit suicide' option
-
-
 	public boolean canGetJob() {
 		return age > 16 && age < 75;
 	}
