@@ -8,17 +8,15 @@ import java.util.Scanner;
 
 public class Player {
 
-	private final int MAX_AGE = 100;
-	private final int MIN_AGE = 0;
-	private final int LOTTERY_PRICE = 2;
-	private final int ALLOWANCE = 5;
+	private static final int MAX_AGE = 12;
+	private static final int YEARLY_ALLOWANCE = 5;
 
-	private Random r;
+	private static final Random r = new Random();
 
 	private String firstName;
 	private String lastName;
 	private int age;
-	private boolean alive;
+	private boolean isAlive;
 	private boolean isInSchool;
 	private boolean hasStudiedThisYear;
 	private boolean hasPlayedLotteryThisYear;
@@ -41,9 +39,8 @@ public class Player {
 			e.printStackTrace();
 		}
 
-		this.r = new Random();
 		this.age = 0;
-		this.alive = true;
+		this.isAlive = true;
 		this.firstName = firstNames.get(r.nextInt(firstNames.size()));
 		this.lastName = lastNames.get(r.nextInt(lastNames.size()));
 		this.isInSchool = false;
@@ -68,33 +65,34 @@ public class Player {
 	}
 
 	public void age() {
-		this.setAge(this.getAge() + 1);
-		System.out.println("\nYou are now " + this.getAge() + " year" + (this.getAge() == 1 ? " " : "s ") + "old.");
+		age++;
+		System.out.println("\nYou are now " + age + " year" + (age == 1 ? " " : "s ") + "old.");
 
-		if (this.isInSchool()) {
-			this.setEducationLevel(this.getEducationLevel() + this.getEducationIncrement());
-			if (this.hasStudiedThisYear()) {
-				this.setHasStudiedThisYear(false);
+		if (isInSchool) {
+			educationLevel += educationIncrement;
+			if (hasStudiedThisYear) {
+				hasStudiedThisYear = false;
 			}
 		}
-		if (this.isReceivingAllowance()) {
-			this.setMoney(this.getMoney() + this.ALLOWANCE);
+		if (isReceivingAllowance) {
+			money += YEARLY_ALLOWANCE;
 		}
 
-		switch (this.getAge()) {
+		switch (age) {
 		case 6:
 			this.startSchool();
 			break;
 		case 10:
 			this.startAllowance();
+			break;
+		case MAX_AGE:
+			this.dieOfOldAge();
 		default:
 			break;
 		}
-	}
+	}	
 
-	public boolean isAlive() {
-		return ((this.getAge() >= this.MIN_AGE && this.getAge() < this.MAX_AGE) && this.getAlive());
-	}
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -118,10 +116,6 @@ public class Player {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public int getLOTTERY_PRICE() {
-		return LOTTERY_PRICE;
 	}
 
 	public boolean isInSchool() {
@@ -157,11 +151,11 @@ public class Player {
 	}
 
 	public void setAlive(boolean alive) {
-		this.alive = alive;
+		this.isAlive = alive;
 	}
 
-	public boolean getAlive() {
-		return alive;
+	public boolean isAlive() {
+		return isAlive;
 	}
 
 	public double getEducationIncrement() {
@@ -172,43 +166,21 @@ public class Player {
 		this.educationIncrement = educationIncrement;
 	}
 
-	private void setMoney(int m) {
-		this.money = m;
-
-	}
-
-	private int getMoney() {
-		return this.money;
-	}
-
-	public Random getR() {
-		return r;
-	}
-
 	public void startSchool() {
-		this.setInSchool(true);
+		isInSchool = true;
 		System.out.println("You have started going to school.");
-		this.setEducationIncrement(0.3);
+		educationIncrement = 0.3;
 	}
 
 	private void startAllowance() {
-		System.out.println("You have started receiving a yearly allowance of $" + this.ALLOWANCE);
-		this.setIsReceivingAllowance(true);
-
-	}
-
-	private boolean isReceivingAllowance() {
-		return this.isReceivingAllowance;
-	}
-
-	private void setIsReceivingAllowance(boolean b) {
-		this.isReceivingAllowance = b;
+		System.out.printf("You have started receiving a yearly allowance of $%d.\n", YEARLY_ALLOWANCE);
+		isReceivingAllowance = true;
 
 	}
 
 	public void statistics() {
-		System.out.println("\n" + (this.getFirstName() + " " + this.getLastName() + "\nAge: " + this.getAge()
-				+ "\nEducation: " + this.getEducationLevel() + "\nMoney: " + this.getMoney() + "\n"));
+		System.out.println("\n" + (firstName + " " + lastName + "\nAge: " + age + "\nEducation: " + getEducationLevel()
+				+ "\nMoney: " + money + "\n")); //getEducationLevel instead of educationLevel because the function formats the decimal to prevent #.#9999999etc.
 	}
 
 	public void showRelationships() {
@@ -217,33 +189,98 @@ public class Player {
 
 	}
 
-	public void die() {
-		this.setAlive(false);
-	}
+	// Currently unused
+	// TODO add a 'commit suicide' option
+
 
 	public boolean canGetJob() {
-		return this.getAge() > 16 && this.getAge() < 75;
+		return age > 16 && age < 75;
 	}
 
 	public void goForAWalk() {
-		// TODO write this
+		if (age <= 2)
+			System.out.println("You are too young to walk.");
+		else 
+			System.out.println("You go for a nice walk.");
 
 	}
 
-	public void playLottery() {
-		this.setHasPlayedLotteryThisYear(true);
-		this.setMoney(this.getMoney() - this.getLOTTERY_PRICE());
-		if (this.getR().nextFloat() <= 0.01) {
+	public void playLottery(int lotteryPrice, Random r) {
+		hasPlayedLotteryThisYear = true;
+		money -= lotteryPrice;
+		if (r.nextFloat() <= 0.01) {
 			// Win the lottery
 		} else {
-			System.out.println("You did not win the lottery. You now have $" + this.getMoney());
+			System.out.println("You did not win the lottery. You now have $" + money);
 		}
 
 	}
 
 	public void browseInternet() {
-		System.out.println("You scroll through social media for a bit. You feel like you're wasting your time.");
-		//TODO add more Internet things
+
+		// TODO add more Internet things
+		if (age >= 8)
+			System.out.println("You scroll through social media for a bit. You feel like you're wasting your time.");
+		else
+			System.out.println("You are too young to use the Internet.");
+
+	}
+
+	public void study() {
+		//TODO organize these if statements if possible
+		if (isInSchool) {
+			if (!hasStudiedThisYear) {
+				if (r.nextFloat() >= 0.7) {
+					System.out.println("You stay focused for a few hours and learn a lot.\nYou feel smarter.");
+					educationIncrement += 0.5;
+				} else {
+					System.out.println(
+							"No matter how hard you try to focus, you can't grasp the subject. Nothing happens.");
+				}
+				hasStudiedThisYear = true;
+			} else {
+				System.out.println("You've already studied this year.");
+			}
+		} else {
+			System.out.println("You aren't in school; you can't study!");
+		}
+
+	}
+
+	public void gamble(int lotteryPrice) {
+		//TODO organize these if statements if possible
+		if (age >= 18) {
+			if (hasPlayedLotteryThisYear) {
+				if (money - lotteryPrice < 0) {
+					System.out.println("You don't have enough money to gamble. You need at least $" + lotteryPrice);
+				} else {
+					playLottery(lotteryPrice, r);
+				}
+			} else {
+				System.out.println("You have already played the lottery this year.");
+			}
+		} else {
+			System.out.println("You are too young to gamble. You need to be at least 18 years old.");
+		}
+
+	}
+
+	public void dropOutOfSchool() {
+		if (isInSchool)
+			isInSchool = false;
+		else
+			System.out.println("You are not in school!");
+
+	}
+
+	public void commitSuicide() {
+		System.out.println("You commited suicide via hanging.");
+		isAlive = false;
+	
+	}
+	private void dieOfOldAge() {
+		System.out.println("You died of old age.");
+		isAlive = false;
 		
 	}
 
