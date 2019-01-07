@@ -90,9 +90,7 @@ public class Player {
 		default:
 			break;
 		}
-	}	
-
-	
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -180,7 +178,8 @@ public class Player {
 
 	public void statistics() {
 		System.out.println("\n" + (firstName + " " + lastName + "\nAge: " + age + "\nEducation: " + getEducationLevel()
-				+ "\nMoney: " + money + "\n")); //getEducationLevel instead of educationLevel because the function formats the decimal to prevent #.#9999999etc.
+				+ "\nMoney: " + money + "\n")); // getEducationLevel instead of educationLevel because the function
+												// formats the decimal to prevent #.#9999999etc.
 	}
 
 	public void showRelationships() {
@@ -196,7 +195,7 @@ public class Player {
 	public void goForAWalk() {
 		if (age <= 2)
 			System.out.println("You are too young to walk.");
-		else 
+		else
 			System.out.println("You go for a nice walk.");
 
 	}
@@ -223,7 +222,7 @@ public class Player {
 	}
 
 	public void study() {
-		//TODO organize these if statements if possible
+		// TODO organize these if statements if possible
 		if (isInSchool) {
 			if (!hasStudiedThisYear) {
 				if (r.nextFloat() >= 0.7) {
@@ -244,7 +243,7 @@ public class Player {
 	}
 
 	public void gamble(int lotteryPrice) {
-		//TODO organize these if statements if possible
+		// TODO organize these if statements if possible
 		if (age >= 18) {
 			if (hasPlayedLotteryThisYear) {
 				if (money - lotteryPrice < 0) {
@@ -272,12 +271,13 @@ public class Player {
 	public void commitSuicide() {
 		System.out.println("You commited suicide via hanging.");
 		isAlive = false;
-	
+
 	}
+
 	private void dieOfOldAge() {
 		System.out.println("You died of old age.");
 		isAlive = false;
-		
+
 	}
 
 }

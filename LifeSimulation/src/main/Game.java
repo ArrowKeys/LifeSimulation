@@ -24,8 +24,8 @@ public class Game {
 
 		int option;
 
-		System.out.print("\nMAIN MENU\n" + "[1] Age 1 year\n" + "[2] Show character statistics\n" + "[3] Show relationships\n"
-				+ "[4] Show Actions\n" + "Choose an option: ");
+		System.out.print("\nMAIN MENU\n" + "[1] Age 1 year\n" + "[2] Show character statistics\n"
+				+ "[3] Show relationships\n" + "[4] Show Actions\n" + "Choose an option: ");
 
 		if (sc.hasNextInt()) {
 			option = sc.nextInt();
@@ -53,8 +53,8 @@ public class Game {
 			System.out.println("Invalid option, please enter a valid integer!");
 
 		}
-		
-		//Checks if the player is alive after the switch statement is broken out of
+
+		// Checks if the player is alive after the switch statement is broken out of
 		if (player.isAlive())
 			mainMenu();
 		else
@@ -104,7 +104,8 @@ public class Game {
 		int option;
 
 		System.out.print("\nACTIVITIES\n" + "[1] Go for a walk\n" + "[2] Study\n" + "[3] Play the lottery ($"
-				+ LOTTERY_PRICE + ")\n" + "[4] Browse the Internet\n" + "[5] Commit Suicide (Quit)\n" + "[0] Back\n" + "Choose an option: ");
+				+ LOTTERY_PRICE + ")\n" + "[4] Browse the Internet\n" + "[5] Commit Suicide (Quit)\n" + "[0] Back\n"
+				+ "Choose an option: ");
 
 		if (sc.hasNextInt()) {
 			option = sc.nextInt();
