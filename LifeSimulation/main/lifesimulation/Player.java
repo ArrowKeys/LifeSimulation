@@ -31,8 +31,8 @@ public class Player {
 	public Player() {
 
 		try {
-			String firstNamesFile = "names/FirstNames.txt";
-			String lastNamesFile = "names/LastNames.txt";
+			String firstNamesFile = "src/resources/names/FirstNames.txt";
+			String lastNamesFile = "src/resources/names/LastNames.txt";
 			firstNames = populateNames(firstNamesFile);
 			lastNames = populateNames(lastNamesFile);
 		} catch (FileNotFoundException e) {
