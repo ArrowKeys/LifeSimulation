@@ -1,4 +1,5 @@
-package main;
+package lifesimulation;
+
 
 import java.util.Scanner;
 
