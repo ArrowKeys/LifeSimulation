@@ -3,7 +3,6 @@ package lifesimulation;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -13,14 +12,14 @@ public class Game {
 	private final Player player;
 
 	private static final int LOTTERY_PRICE = 2;
-	private ArrayList<Job> JOBS = new ArrayList<Job>();
+	private static ArrayList<Job> JOBS = new ArrayList<Job>();
 
 	public Game(Player player) {
 		this.sc = new Scanner(System.in);
 		this.player = player;
 
 		try {
-			this.JOBS = populateJobsList();
+			Game.JOBS = populateJobsList();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -201,7 +200,7 @@ public class Game {
 	private void employmentMenu() {
 		if (player.canGetJob())
 			for (int i = 0; i < JOBS.size(); i++) {
-				System.out.printf("[%d] %s (%d)\n", i, JOBS.get(i).getName(), JOBS.get(i).getSalary());
+				System.out.printf("[%d] %s ($%d)\n", i, JOBS.get(i).getName(), JOBS.get(i).getSalary());
 			}
 		// TODO add jobs etc
 		else

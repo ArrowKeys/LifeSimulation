@@ -38,6 +38,10 @@ public class Player {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		/*
+		 * 
+		 */
 
 		this.age = 0;
 		this.isAlive = true;
