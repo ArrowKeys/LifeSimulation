@@ -1,6 +1,10 @@
 package lifesimulation;
 
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Game {
@@ -9,11 +13,39 @@ public class Game {
 	private final Player player;
 
 	private static final int LOTTERY_PRICE = 2;
+	private ArrayList<Job> JOBS = new ArrayList<Job>();
 
 	public Game(Player player) {
 		this.sc = new Scanner(System.in);
 		this.player = player;
+
+		try {
+			this.JOBS = populateJobsList();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		System.out.println(startupMessage());
+	}
+
+	private static ArrayList<Job> populateJobsList() throws FileNotFoundException {
+
+		ArrayList<Job> jobs = new ArrayList<Job>();
+
+		try {
+			String jobsFile = "src/main/java/resources/jobs/jobs.txt";
+			Scanner sc = new Scanner(new File(jobsFile));
+			while (sc.hasNextLine()) {
+				String[] j = sc.nextLine().split("-");
+				jobs.add(new Job(j[0], Integer.parseInt(j[1])));
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		Collections.shuffle(jobs);
+		return jobs;
+
 	}
 
 	private String startupMessage() {
@@ -168,7 +200,9 @@ public class Game {
 
 	private void employmentMenu() {
 		if (player.canGetJob())
-			System.out.println("Jobs will be added Soon™");
+			for (int i = 0; i < JOBS.size(); i++) {
+				System.out.printf("[%d] %s (%d)\n", i, JOBS.get(i).getName(), JOBS.get(i).getSalary());
+			}
 		// TODO add jobs etc
 		else
 			System.out.println("You are unable to get a job right now.");
